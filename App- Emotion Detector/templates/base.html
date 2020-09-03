@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>Speech Emotion Recognition</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style3.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="myContainer">
+    <div class="inner-container">
+        <img class="logo" src="../static/images/img2.png">
+        <div class="bottom">
+            <h2 class="title">Speech Emotion Recognition</h2>
+            {% if isComplete %}
+                <h4 style="display: inline-block;"> Your emotion is: </h4>
+                {% if audio=='happy' %}
+                    <h3 class="smile" style=" display: inline-block;">'happy' 😄</h3>
+                {% endif %}
+
+                {% if audio=='anger' %}
+                    <h3 class="smile" style=" display: inline-block;">'anger' 😡</h3>
+                {% endif %}
+
+                {% if audio=='sad' %}
+                    <h3 class="smile" style=" display: inline-block;">'sad' 😢</h3>
+                {% endif %}
+
+                {% if audio=='neutral' %}
+                    <h3 class="smile" style=" display: inline-block;">'neutral' 😐</h3>
+                {% endif %}
+
+                <div class="prog">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{stat20[0]}}%"
+                         aria-valuenow="{{stat[0]}}" aria-valuemin="0" aria-valuemax="100"> Anger {{stat[0]}}%</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: {{stat20[1]}}%"
+                         aria-valuenow="{{stat[1]}}" aria-valuemin="0" aria-valuemax="100">Happy {{stat[1]}}%</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {{stat20[2]}}%"
+                         aria-valuenow="{{stat[2]}}" aria-valuemin="0" aria-valuemax="100">Neutral {{stat[2]}}%</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{stat20[3]}}%"
+                         aria-valuenow="{{stat[3]}}" aria-valuemin="0" aria-valuemax="100">Sad {{stat[3]}}%</div>
+                </div>
+                </div>
+
+                <a href="/">
+                <input class="back" type="back" value="Try Again"/>
+                </a>
+
+            {% else %}
+                <p class="subtitle">Record yourself and we will tell you how you feel
+                <p/>
+
+                <audio id="player" controls></audio>
+                <div class="buttons">
+                    <form action="http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
+                        <label for="recorder" class="custom-file-upload">
+                            <i class="fa fa-cloud-upload"></i> Upload Audio
+                        </label>
+                        <input type="file" accept="audio/*" capture id="recorder" name="audio">
+                        <!-- this is pop the ability to only upload a file-->
+                        <input id="pred" class="custom-file-upload" type="submit" value="Predict"/>
+                    </form>
+                </div>
+
+                <script>
+                    const recorder = document.getElementById('recorder');
+                    const player = document.getElementById('player');
+
+                    recorder.addEventListener('change', function (e) {
+                        const file = e.target.files[0];
+                        const url = URL.createObjectURL(file);
+                        // Do something with the audio file.
+                        player.src = url;
+                    });
+                </script>
+
+                <script>
+                    const handleSuccess = function (stream) {
+                        const context = new AudioContext();
+                        const source = context.createMediaStreamSource(stream);
+                        const processor = context.createScriptProcessor(1024, 1, 1);
+
+                        source.connect(processor);
+                        processor.connect(context.destination);
+
+                        processor.onaudioprocess = function (e) {
+                            // Do something with the data, e.g. convert it to WAV
+                            console.log(e.inputBuffer);
+                        };
+                    };
+
+                    navigator.mediaDevices.getUserMedia({audio: true, video: false})
+                        .then(handleSuccess);
+                </script>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
