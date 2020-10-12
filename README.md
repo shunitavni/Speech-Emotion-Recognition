@@ -1,3 +1,5 @@
+[embed]https://github.com/shunitavni/Speech-Emotion-Recognition/blob/master/Final_Ptoject%20SA.pdf[/embed]
+
 # Speech-Emotion-Recognition
 
 This is my final project part of my Deep Learning specializing.
