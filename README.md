@@ -42,7 +42,7 @@ Possible Labels:
 
 In our quest to classify audio clips, we realized that one set of data would not represent
 the distribution of emotion through real-world sound well enough, so throughout the process,
-we created one complete set of ours containing 4 different sets of .wav audio files.
+we created new Dataset which contains 4 different Datasets of .wav audio files listed below.
 
 * Surrey Audio-Visual Expressed Emotion (SAVEE)
 * Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS)
@@ -52,8 +52,9 @@ we created one complete set of ours containing 4 different sets of .wav audio fi
 Total amount of samples in our set (before augmentation): 7,464 <br/>
 Total amount of samples in our set (after augmentation): 14,928
 
+_____________________________________________________________________________________________________________________________________
 
-
+***Data-Set:***
 
 _____________________________________________________________________________________________________________________________________
 
