@@ -1,6 +1,8 @@
 
 # Speech-Emotion-Recognition
 
+***Please for the full description read Final Project Summery.***
+
 This is my final project part of my Deep Learning specializing.
 
 The goal of this project was to create an emotion recognition application based on models from the world of deep learning.
