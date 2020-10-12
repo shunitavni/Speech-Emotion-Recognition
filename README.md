@@ -1,7 +1,7 @@
 
 # Speech-Emotion-Recognition
 
-***Please for the full description read Final Project Summery.***
+[***Please for the full description read Final Project Summery.***] (https://github.com/shunitavni/Speech-Emotion-Recognition/blob/master/Final_Ptoject%20SA.pdf)
 
 This is my final project part of my Deep Learning specializing.
 
