@@ -1,4 +1,3 @@
-[embed]https://github.com/shunitavni/Speech-Emotion-Recognition/blob/master/Final_Ptoject%20SA.pdf[/embed]
 
 # Speech-Emotion-Recognition
 
